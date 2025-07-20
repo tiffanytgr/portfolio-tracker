@@ -529,23 +529,23 @@ def create_benchmark_comparison_table(portfolio_returns, benchmark_data):
     df = pd.DataFrame(comparison_data, columns=columns)
     
     return df
-
 def create_holdings_table(portfolio_df, base_currency='SGD', sort_by='current_value', ascending=False):
     """Create sortable detailed holdings table"""
     
     if portfolio_df.empty:
         return pd.DataFrame()
     
+    # 1) Sort by the raw numeric column first
+    df_sorted = portfolio_df.sort_values(sort_by, ascending=ascending)
+    
+    # 2) Then select & format only after sorting
     currency_symbol = 'S$' if base_currency == 'SGD' else '$'
+    display_df = df_sorted[['symbol', 'long_name', 'current_value', 'weight_pct', 
+                            'gain_loss', 'gain_loss_pct', 'quantity', 'current_price', 
+                            'avg_cost', 'country', 'sector']].copy()
     
-    display_df = portfolio_df[['symbol', 'long_name', 'current_value', 'weight_pct', 
-                              'gain_loss', 'gain_loss_pct', 'quantity', 'current_price', 
-                              'avg_cost', 'country', 'sector']].copy()
+    # 3) Now format the numbers for display
     
-    # Sort by specified column
-    display_df = display_df.sort_values(sort_by, ascending=ascending)
-    
-    # Format columns
     display_df['current_value'] = display_df['current_value'].apply(lambda x: f"{currency_symbol}{x:,.2f}")
     display_df['weight_pct'] = display_df['weight_pct'].apply(lambda x: f"{x:.2f}%")
     display_df['gain_loss'] = display_df['gain_loss'].apply(lambda x: f"{currency_symbol}{x:+,.2f}")
