@@ -1,0 +1,65 @@
+{
+  "known_splits": {
+    "AMZN": [
+      {
+        "date": "2022-06-06",
+        "ratio": 20,
+        "description": "20-for-1 split"
+      }
+    ],
+    "GOOGL": [
+      {
+        "date": "2022-07-18",
+        "ratio": 20,
+        "description": "20-for-1 split"
+      }
+    ],
+    "GOOG": [
+      {
+        "date": "2022-07-18",
+        "ratio": 20,
+        "description": "20-for-1 split"
+      }
+    ],
+    "AAPL": [
+      {
+        "date": "2020-08-31",
+        "ratio": 4,
+        "description": "4-for-1 split"
+      }
+    ],
+    "TSLA": [
+      {
+        "date": "2022-08-25",
+        "ratio": 3,
+        "description": "3-for-1 split"
+      },
+      {
+        "date": "2020-08-31",
+        "ratio": 5,
+        "description": "5-for-1 split"
+      }
+    ],
+    "NVDA": [
+      {
+        "date": "2021-07-20",
+        "ratio": 4,
+        "description": "4-for-1 split"
+      }
+    ],
+    "MSFT": [
+      {
+        "date": "2019-09-18",
+        "ratio": 2,
+        "description": "2-for-1 split"
+      }
+    ],
+    "META": [
+      {
+        "date": "2022-08-25",
+        "ratio": 2,
+        "description": "2-for-1 split"
+      }
+    ]
+  }
+}
