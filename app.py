@@ -12,7 +12,7 @@ warnings.filterwarnings('ignore')
 
 # Set page config
 st.set_page_config(
-    page_title="Portfolio Dashboard v7",
+    page_title="vestedIn",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
