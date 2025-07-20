@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import json
 from datetime import datetime, timedelta
 import yfinance as yf
 import plotly.graph_objects as go
@@ -57,6 +58,10 @@ class PortfolioTracker:
         self.holdings = pd.DataFrame()
         self.transactions = pd.DataFrame()
         self.market_data = {}
+        
+        # Load stock split data
+        with open("stock_splits.json") as f:
+            self.stock_splits = json.load(f).get("known_splits", {})
         
         # Market suffix mappings for yfinance
         self.market_suffixes = {
@@ -139,12 +144,27 @@ class PortfolioTracker:
             
             # Add country info
             df['country'] = df['currency'].map(_self.currency_to_country).fillna('Other')
+
+            # --- Apply stock splits ---
+            def apply_stock_splits(row):
+                splits = _self.stock_splits.get(row['symbol'], [])
+                for split in splits:
+                    split_date = pd.to_datetime(split['date'])
+                    if row['date'] < split_date:
+                        ratio = split['ratio']
+                        row['quantity'] *= ratio
+                        row['price'] /= ratio
+                return row
+
+            df = df.apply(apply_stock_splits, axis=1)
+            # --------------------------
             
             return df
             
         except Exception as e:
             st.error(f"Error loading CSV: {e}")
             return pd.DataFrame()
+
 
     def calculate_holdings(self, transactions_df):
         """Calculate current holdings from transactions"""
