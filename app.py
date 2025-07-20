@@ -710,7 +710,7 @@ def create_aggregation_page(portfolio_df, base_currency='SGD'):
 
 def main():
     # Main title
-    st.markdown('<h1 class="main-header">Portfolio Dashboard v7</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">Portfolio Dashboard</h1>', unsafe_allow_html=True)
     
     # Initialize tracker
     if 'tracker' not in st.session_state:
